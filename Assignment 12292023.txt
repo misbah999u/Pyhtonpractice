@@ -1,0 +1,58 @@
+Assignment Python 12/29/2023
+
+->How can you randomize the items of a list in place in Python??
+
+Solution: We can make use of shuffle function from the random module. But the originial list format will be changed. If we want to keep the same format we make use of sample function. Which may keep the same format of the original list and create a new randomized list as well.
+Code:
+import random
+my_list=[1,2,3,4,5]
+random.shuffle(my_list)
+print(my_list)
+
+->What does [::-1] do?
+
+Solution: In simple words we can say that it is used to reverse the given sequence without modifying the original one.
+
+Code:
+original_list=[1,2,3]
+reversed_list=original_list[::-1]
+print(reversed_list)
+
+->What is the lambda function in Python?
+
+Soultion: Lambda function is an anonymous function used for short and simple code. Can be better used when used inside another function. It is defined by lambda keyword. It is having the following syntax lamda argument: expression. It can take muultiple arguments but can have only one expression.
+
+Code:
+def myfunc(n):
+  return lambda a:a*n
+mydoubler = myfunc(2)
+print(mydoubler(2))
+
+-> What Is the Difference Between Classmethod and Staticmethod?
+
+Solution: Classmethod: This decorator is used to define a method which is directly bound to the class rather than the instance of the class. It takes class as its first parameter commonly named as cls. It can be used as an alternative for the constructors or methods related to the class. 
+Code:
+class MyClass:
+    class_var = "class meth"
+@classmethod
+def class_method(cls):
+print(cls.class_var)
+MyClass.class_method()
+Staticmethod: This decorator is not related to the class neither the instance of class. It cannot modify the class, instance of the class directly. It can be used as a regular function. 
+Code:
+class MyClass:
+@staticmethod
+def class_method():
+print("Static meth")
+MyClass.class_method()
+
+->What do you understand by Tkinter??
+
+Solution: tkinter is gui toolkit comes with python used to create gui desktop applications. It is simple and easy to use on different platforms inlcuding most of the Unix like systems,windows and macos. It is event driven. Comes with tk GUI toolkit in python. For  more advanced features we can use PyQT, kivy,wxPython.
+
+Code:
+ import tkinter as tk
+root = tk.TK()
+label=tk.Label(root,text="hello")
+label.pack()
+root.mainloop()
