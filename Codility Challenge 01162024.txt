@@ -1,0 +1,33 @@
+Codility Challenge 01/16/2024	
+
+-> Write a function:
+
+def solution(A, B, K)
+
+that, given three integers A, B and K, returns the number of integers within the range [A..B] that are divisible by K, i.e.:
+
+{ i : A ≤ i ≤ B, i mod K = 0 }
+
+For example, for A = 6, B = 11 and K = 2, your function should return 3, because there are three numbers divisible by 2 within the range [6..11], namely 6, 8 and 10.
+
+Write an efficient algorithm for the following assumptions:
+
+A and B are integers within the range [0..2,000,000,000];
+K is an integer within the range [1..2,000,000,000];
+A ≤ B.
+
+Solution: 
+def solution(A, B, K):
+    return (B // K) - ((A - 1) // K)
+
+A = 6
+B = 11
+K = 2
+result = solution(A, B, K)
+print(result)  
+
+Output :
+3
+
+Link: https://app.codility.com/demo/results/trainingD3WSCJ-GJX/
+Explanation: (B // K) tells us how many numbers from 1 to B can be divided evenly by K. ((A - 1) // K) tells us how many numbers from 1 to (A - 1) can be divided evenly by K. We subtract 1 from A to make sure we count A in the final result. When we subtract these two values, we get the count of numbers in the range [A..B] that can be evenly divided by K.
