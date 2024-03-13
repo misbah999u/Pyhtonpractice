@@ -1,0 +1,40 @@
+LeetCode Challenge 8 (AL&DS) 03/13/2024
+-> You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+ 
+
+Example 1:
+
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+Example 2:
+
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transactions are done and the max profit = 0.
+ 
+
+Constraints:
+
+1 <= prices.length <= 105
+0 <= prices[i] <= 104
+
+Solution:
+class Solution:
+    def maxProfit(self, prices):
+        buy = prices[0]
+        profit = 0
+        for i in range(1, len(prices)):
+            if prices[i] < buy:
+                buy = prices[i]
+            elif prices[i] - buy > profit:
+                profit = prices[i] - buy
+        return profit
+Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/solutions/4872273/challenge-8-al-ds/
+Explanation: So, this implementation iterates through the prices of the stock and keeps track of the best buying price (buy) and the maximum profit (profit). It efficiently calculates the maximum profit that can be obtained by buying and selling the stock once with a linear runtime complexity of O(n), where n is the number of prices in the list.
