@@ -1,0 +1,33 @@
+LeetCode Challenge 1(AL&DS) 03/04/2024
+
+-> Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.
+
+ 
+
+Example 1:
+
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+Example 2:
+
+Input: s = ["H","a","n","n","a","h"]
+Output: ["h","a","n","n","a","H"]
+ 
+
+Constraints:
+
+1 <= s.length <= 105
+s[i] is a printable ascii character.
+Solution: 
+class Solution(object):
+    def reverseString(self, s):
+        """
+        :type s: List[str]
+        :rtype: None Do not return anything, modify s in-place instead.
+        """
+        return s.reverse()
+        
+Link: https://leetcode.com/problems/reverse-string/solutions/4829497/challenge-1-al-ds/
+Explanation: This is a Python class `Solution` with a method `reverseString` that takes a list of strings `s` as input. The method reverses the elements of the list `s` in-place using the `reverse()` method. The method does not return anything explicitly (`rtype: None`), but modifies the list `s` directly.

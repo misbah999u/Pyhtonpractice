@@ -1,0 +1,66 @@
+LeetCode Challenge 13 02/14/2024
+
+-> Table: Employees
+
++-------------+----------+
+| Column Name | Type     |
++-------------+----------+
+| employee_id | int      |
+| name        | varchar  |
+| reports_to  | int      |
+| age         | int      |
++-------------+----------+
+employee_id is the column with unique values for this table.
+This table contains information about the employees and the id of the manager they report to. Some employees do not report to anyone (reports_to is null). 
+ 
+
+For this problem, we will consider a manager an employee who has at least 1 other employee reporting to them.
+
+Write a solution to report the ids and the names of all managers, the number of employees who report directly to them, and the average age of the reports rounded to the nearest integer.
+
+Return the result table ordered by employee_id.
+
+The result format is in the following example.
+
+ 
+
+Example 1:
+
+Input: 
+Employees table:
++-------------+---------+------------+-----+
+| employee_id | name    | reports_to | age |
++-------------+---------+------------+-----+
+| 9           | Hercy   | null       | 43  |
+| 6           | Alice   | 9          | 41  |
+| 4           | Bob     | 9          | 36  |
+| 2           | Winston | null       | 37  |
++-------------+---------+------------+-----+
+Output: 
++-------------+-------+---------------+-------------+
+| employee_id | name  | reports_count | average_age |
++-------------+-------+---------------+-------------+
+| 9           | Hercy | 2             | 39          |
++-------------+-------+---------------+-------------+
+Explanation: Hercy has 2 people report directly to him, Alice and Bob. Their average age is (41+36)/2 = 38.5, which is 39 after rounding it to the nearest integer.
+
+Solution:
+SELECT 
+    e.employee_id,
+    e.name,
+    COUNT(sub.employee_id) AS reports_count,
+    ROUND(AVG(sub.age), 0) AS average_age
+FROM 
+    Employees e
+JOIN 
+    Employees sub ON e.employee_id = sub.reports_to
+GROUP BY 
+    e.employee_id, e.name
+HAVING 
+    COUNT(sub.employee_id) > 0
+ORDER BY 
+    e.employee_id;
+
+
+Link: https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/solutions/4758171/challenge-13/
+Explanation: This query joins the Employees table with itself using the condition where the employee_id of the manager matches the reports_to field of another employee (sub). Then, it calculates the count of direct reports and the average age of those reports for each manager. The HAVING clause ensures that only managers with at least one direct report are included in the result. Finally, the result is ordered by employee_id.

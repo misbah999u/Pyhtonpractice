@@ -1,0 +1,24 @@
+Assign 12/26/2023
+
+-> Static VS Dyanamic Typing
+
+Solution:
+
+In Python, "static typing" and "dynamic typing" describe how the language manages variable types:
+
+1. **Static Typing**: Found in languages like C, C++, and Java, static typing binds variables to specific data types at compile time. Once declared, a variable's type remains fixed throughout execution. This necessitates explicit declaration of variable types before use.
+
+2. **Dynamic Typing**: In languages such as Python, variables are not tied to specific types at compile time. Instead, a variable's type is determined at runtime based on its assigned value. This allows variables to hold values of any type and to change types during program execution. While dynamic typing facilitates concise code and rapid development, it can also lead to runtime errors if type handling is inadequate.
+
+In Python, variable types do not require explicit declaration. For instance:
+
+```python
+x = 5        # x is an integer
+x = "hello"  # now x is a string
+```
+
+In this example, `x` initially holds an integer but later takes on a string value seamlessly, reflecting Python's dynamic typing.
+
+Dynamic typing provides benefits like flexibility and quick prototyping but may introduce complexity, particularly in larger projects. Contrastingly, static typing can identify type-related errors during compilation, fostering more robust and predictable code.
+
+To mitigate dynamic typing's drawbacks, Python introduced type hints in version 3.5. Type hints enable developers to specify expected types for variables, function parameters, and return values, aiding in static type analysis. While not enforced by the Python interpreter, these hints can be utilized by external tools such as type checkers to catch potential errors before runtime, bringing some advantages of static typing to Python without compromising its dynamic nature.
