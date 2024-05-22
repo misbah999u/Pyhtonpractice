@@ -1,0 +1,38 @@
+LeetCode Challenge 45(AL&DS) 05/16/2024
+-> Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+Example 1:
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+Example 2:
+
+Input: intervals = [[1,4],[4,5]]
+Output: [[1,5]]
+Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+ 
+
+Constraints:
+
+1 <= intervals.length <= 104
+intervals[i].length == 2
+0 <= starti <= endi <= 104
+
+Solution: class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals = sorted(intervals)
+        result = []
+        i=0
+        for interval in intervals:
+            if len(result)==0:
+                result.append(interval)
+            else:
+                if result[i][1]> interval[1]:
+                    continue
+                elif result[i][1] >= interval[0]:
+                    result[i][1] = interval[1]
+                else:
+                    result.append(interval)
+                    i+=1
+        return result
+Link: https://leetcode.com/problems/merge-intervals/solutions/5194806/challenge-45-al-ds/
+Explanation: Sort the intervals. Initialize an empty result list. Iterate through the intervals: If the result list is empty or the current interval does not overlap with the last one in the result, add it to the result. If it overlaps, merge it with the last interval in the result.Return the result list of merged intervals.

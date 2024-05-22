@@ -1,0 +1,36 @@
+LeetCode Challenge 43(AL&DS) 05/14/2024
+-> Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+ 
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of parentheses only '()[]{}'.
+
+Solution: class Solution:
+    def isValid(self, s: str) -> bool:
+        while '()' in s or '[]'in s or '{}' in s:
+            s = s.replace('()','').replace('[]','').replace('{}','')
+        return False if len(s) !=0 else True
+Link: https://leetcode.com/problems/valid-parentheses/solutions/5194779/challenge-43-al-ds/
+Explanation:The method repeatedly removes pairs of matching brackets ('()', '[]', '{}') from the string s using replace until no more pairs can be found. After the loop, if the string is empty (len(s) == 0), all brackets were matched correctly, and the method returns True. Otherwise, it returns False, indicating unmatched brackets remain.

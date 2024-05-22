@@ -1,0 +1,70 @@
+LeetCode Challenge 48(AL&DS) 05/21/2024
+-> Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+
+ 
+
+Example 1:
+
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+Example 2:
+
+Input: digits = ""
+Output: []
+Example 3:
+
+Input: digits = "2"
+Output: ["a","b","c"]
+ 
+
+Constraints:
+
+0 <= digits.length <= 4
+digits[i] is a digit in the range ['2', '9'].
+
+Solution:class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        alpha={2:"abc",3:"def",4:"ghi",5:"jkl",6:"mno",7:"pqrs",8:"tuv",9:"wxyz"}
+        res=[]
+        if len(digits)==1:
+            for i in alpha[int(digits[0])]:
+                res.append(i)
+            return res 
+        if len(digits)==2:
+            for i in alpha[int(digits[0])]:
+                a=i
+                for j in alpha[int(digits[1])]:
+                    a+=j
+                    res.append(a) 
+                    a=i
+            return res        
+        if len(digits)==3:
+            for i in alpha[int(digits[0])]:
+                a=i
+                for j in alpha[int(digits[1])]:
+                    b=a+j
+                    c=b
+                    for k in alpha[int(digits[2])]:
+                        c+=k
+                        res.append(c) 
+                        c=b        
+            return res 
+        if len(digits)==4:
+            for i in alpha[int(digits[0])]:
+                a=i
+                for j in alpha[int(digits[1])]:
+                    b=a+j
+                    c=b
+                    for k in alpha[int(digits[2])]:
+                        d=a+j+k
+                        e=d
+                        for l in alpha[int(digits[3])]:
+                            e+=l
+                            res.append(e) 
+                            e=d
+            return res                   
+Link: https://leetcode.com/problems/letter-combinations-of-a-phone-number/solutions/5194824/challenge-48-al-ds/
+Explanation: The `letterCombinations` method in the `Solution` class generates all possible letter combinations that a given digit string could represent on a traditional phone keypad. It uses a dictionary `alpha` to map digits to their corresponding letters. The method constructs combinations by iterating through the possible letters for each digit, handling up to four digits with nested loops to build combinations, and appending each valid combination to the result list `res`. This approach allows for the systematic construction of all possible letter combinations for the given input digits.
