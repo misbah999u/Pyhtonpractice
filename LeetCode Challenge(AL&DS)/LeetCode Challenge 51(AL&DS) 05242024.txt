@@ -1,0 +1,76 @@
+LeetCode Challenge 51(AL&DS) 05/24/2024
+->
+Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+ 
+
+Example 1:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+Output: true
+Example 2:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+Output: true
+Example 3:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+Output: false
+ 
+
+Constraints:
+
+m == board.length
+n = board[i].length
+1 <= m, n <= 6
+1 <= word.length <= 15
+board and word consists of only lowercase and uppercase English letters.
+ 
+
+Follow up: Could you use search pruning to make your solution faster with a larger board?
+
+
+Solution: from typing import List
+
+class Solution:
+    @staticmethod
+    def add_border_of_zero(mat: List[List[str]]) -> List[List[str]]:
+        rows = len(mat)
+        cols = len(mat[0])
+        bordered_mat = [[""] * (cols + 2) for _ in range(rows + 2)]
+        for i in range(rows):
+            for j in range(cols):
+                bordered_mat[i + 1][j + 1] = mat[i][j]
+        return bordered_mat
+
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        new_board = self.add_border_of_zero(board)
+        
+        def check(i: int, j: int, idx: int) -> bool:
+            if idx == len(word):
+                return True
+            if new_board[i][j] == word[idx]:
+                temp = new_board[i][j]
+                new_board[i][j] = "" 
+                idx += 1
+                result = (check(i, j + 1, idx) or
+                          check(i + 1, j, idx) or
+                          check(i - 1, j, idx) or
+                          check(i, j - 1, idx))
+                new_board[i][j] = temp 
+                return result
+            return False
+        
+        for i in range(1, len(new_board)):
+            for j in range(1, len(new_board[0])):
+                if new_board[i][j] == word[0]:
+                    if check(i, j, 0):
+                        return True
+        return False
+Link: https://leetcode.com/problems/word-search/solutions/5265098/challenge-51-al-ds/
+Explanation: The `exist` function checks if a given word can be found in a 2D board of characters. It first adds a border of empty strings around the board to simplify boundary checks. The `check` function then recursively searches for the word in all four directions, returning `True` if the word is found and `False` otherwise.

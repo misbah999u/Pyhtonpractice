@@ -1,0 +1,52 @@
+LeetCode Challenge 53(AL&DS) 05/30/2024
+-> Given an integer array nums, return the length of the longest strictly increasing 
+subsequence
+.
+
+ 
+
+Example 1:
+
+Input: nums = [10,9,2,5,3,7,101,18]
+Output: 4
+Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+Example 2:
+
+Input: nums = [0,1,0,3,2,3]
+Output: 4
+Example 3:
+
+Input: nums = [7,7,7,7,7,7,7]
+Output: 1
+ 
+
+Constraints:
+
+1 <= nums.length <= 2500
+-104 <= nums[i] <= 104
+ 
+
+Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?
+
+
+Solution:class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        from bisect import bisect_left
+        n = len(nums)
+        # Initialising the temporary list to store the start element and len of lis will equla 1
+        temp = [nums[0]]
+        length = 1
+        # from 1 to n-1 as we have initialy added the starting element to the temp
+        for i in range(1,n):
+            # If the element in the nums is greater than the last element in the temp list add it to the temp
+            if nums[i] > temp[-1]:
+                temp.append(nums[i])
+                length += 1
+            else:
+                # Use binary search to place the item in temp
+                ind = bisect_left(temp,nums[i])
+                temp[ind] = nums[i]
+        return length
+        
+Link: https://leetcode.com/problems/longest-increasing-subsequence/solutions/5265136/challenge-53-al-ds/
+Explanation:The `lengthOfLIS` function computes the length of the longest increasing subsequence in an array using a dynamic approach with binary search for efficiency. It maintains a `temp` list to store the smallest possible end elements of increasing subsequences of different lengths. For each element in the array, it either appends it to `temp` if it is larger than the last element or replaces an existing element using binary search to keep `temp` valid, returning the length of `temp` at the end.

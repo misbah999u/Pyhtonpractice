@@ -1,0 +1,35 @@
+LeetCode Challenge 50(AL&DS) 05/23/2024
+-> Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+ 
+
+Example 1:
+
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+
+Input: n = 1
+Output: ["()"]
+ 
+
+Constraints:
+
+1 <= n <= 8
+Solution:
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def backtrack(S='', left=0, right=0):
+            if len(S) == 2 * n:
+                result.append(S)
+                return
+            if left < n:
+                backtrack(S + '(', left + 1, right)
+            if right < left:
+                backtrack(S + ')', left, right + 1)
+
+        result = []
+        backtrack()
+        return result
+Link: https://leetcode.com/problems/generate-parentheses/solutions/5265085/challenge-50-al-ds/
+Explanation: The `generateParenthesis` function uses a backtracking approach to generate all combinations of well-formed parentheses for a given `n`. The inner `backtrack` function builds the string by adding '(' or ')' based on the current counts, ensuring the parentheses are balanced. The result list collects all valid combinations, which is returned at the end.
