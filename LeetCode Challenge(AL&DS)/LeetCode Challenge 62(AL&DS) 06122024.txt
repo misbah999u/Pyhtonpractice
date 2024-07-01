@@ -1,0 +1,48 @@
+LeetCode Challenge 62(AL&DS) 06/12/2024
+-> Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,3,4,4,5]
+Output: [1,2,5]
+Example 2:
+
+
+Input: head = [1,1,1,2,3]
+Output: [2,3]
+ 
+
+Constraints:
+
+The number of nodes in the list is in the range [0, 300].
+-100 <= Node.val <= 100
+The list is guaranteed to be sorted in ascending order.
+
+Solution: # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+        current  = dummy
+
+        while current.next and current.next.next:
+            if current.next.val == current.next.next.val:
+                while current.next and current.next.next and current.next.val == current.next.next.val:
+                    current.next = current.next.next
+
+                current.next = current.next.next
+
+            else:
+                current =  current.next
+
+        return dummy.next
+
+Link: https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/solutions/5399258/challenge-62-al-ds/
+Explanation: This solution removes duplicate nodes from a sorted linked list. It uses a dummy node to simplify edge cases and a `current` pointer to traverse the list, skipping over nodes with duplicate values to ensure each value appears only once. Finally, it returns the modified list starting from the node after the dummy.
